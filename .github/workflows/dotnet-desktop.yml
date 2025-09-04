@@ -56,22 +56,82 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: your-solution-name                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: MyLibrary                         # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: MyTest/MyTest.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Build
-      run: dotnet build MyProject.sln
-    
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore dependencies
+      run: dotnet restore
 
+    # Execute all unit tests in the solution
+    - name: Тесты
+      run: dotnet test
+
+          var obj = new Class1();
+            int result = obj.Factorial(5);
+            Assert.Equal(120, result);
+
+            Debug.WriteLine($"Вызван Factorial с n = {n}");
+            Trace.Listeners.Add(new TextWriterTraceListener("log.txt"));
+                    [Fact]
+        public void Factorial_ThrowsOnNegativeInput()
+        {
+            var obj = new Class1();
+            Assert.Throws<ArgumentException>(() => obj.Factorial(-1));
+        }
+
+         public int Factorial(int n)
+ {
+     Debug.WriteLine($"Вызван Factorial с n = {n}");
+     Trace.Listeners.Add(new TextWriterTraceListener("log.txt"));
+
+
+     if (n < 0) throw new ArgumentException("n должен быть >= 0");
+
+     int result = 1;
+     for (int i = 2; i <= n; i++) result *= i;
+
+     Debug.WriteLine($"Результат: {result}");
+     File.AppendAllText("debug.log", $"Результат: {result}\n");
+
+     return result;
+ 
+       
+ }
+
+            git checkout -b name
+            git log --oneline --graph --decorate --all
+
+            git checkout thirt
+git cherry-pick 4437b30^..master
+
+git checkout thirt
+git rebase --onto master 6c1aad3
+
+Dockerfile:
+
+# Используем официальный образ
+Python FROM python:3.9-slim
+# Устанавливаем рабочую директорию в контейнере
+WORKDIR /app
+# Копируем текущую директорию в контейнер
+COPY . .
+# Команда для запуска приложения
+CMD ["python", "app.py"]
+
+docker build -t my-python-app .
+Здесь:
+
+-t my-python-app — задаёт имя образа.
+. — указывает, что Dockerfile находится в текущей директории.
+
+docker run my-python-app
